@@ -23,21 +23,25 @@ The limiting distribution r, such that r=Mr, is
 $$
 r=(1/4,1/4,1/4,1/4)
 $$
+It is a probability distribution, $\sum_i r_i = 1$.
 
 ## 1.3 Relation to Random Walk (i)
 The random walk transition matix:
 $$
 M = D^{-1}A
 $$
+One can show that each row is normalized, $\forall i: \sum_j M_{ij} = 1$, so it has proper probabilistic property.
 
 ## 1.4 Relation to Random Walk (ii)
 The random walk transition matix with skip connection:
 $$
 M = \frac{1}{2}I + \frac{1}{2}D^{-1}A
 $$
+Likewise to the previous case, $\forall i: \sum_j M_{ij} = 1$.
+
 
 ## 1.5 Over-Smoothing Effect
-We need to apply the random matrix transition matrix infinite number of times to an arbitrary initial state vector $r$ and investigate the resulting state $r'$:
+We need to apply the random walk transition matix infinite number of times to an arbitrary initial state vector $r$ and investigate the resulting state $r'$:
 $$
 r' = \lim_{l\to\infty}M^{l}r
 $$
@@ -51,5 +55,12 @@ Contributions corresponding to eigenvalue $\lambda = 1$ will survive as $l$ grow
 $$
 r' \approx (v_1\cdot v_1^T) r  = \frac{\sum_i r_i}{n} \hat{I} = \frac{1}{n} \hat{I}
 $$
-So, the resulting state has all identical components. This explains the over-smoothing effect.
+So, the resulting state $r'$ has all identical components regardless of the initial state $r$ distrbition. 
 
+We can generalize this to embeddings matrix $H$ with each row containing nodes embeddings:
+$$
+h'_{ij} = \lim_{l\to\infty}(M^{l} H)_{ij} \approx \sum_{k}(v_1\cdot v_1^T)_{ik} H_{kj} = \frac{1}{n}\sum_k H_{kj}
+$$
+Thus resulting embedding vectors for all nodes $i$ are identical having components $j$ as shown in the above formular.
+
+## 1.6 Learning BFS with GNN
