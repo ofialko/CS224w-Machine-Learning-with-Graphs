@@ -64,3 +64,71 @@ $$
 Thus resulting embedding vectors for all nodes $i$ are identical having components $j$ as shown in the above formular.
 
 ## 1.6 Learning BFS with GNN
+
+BFS algorythm:
+* Source node $𝑠$
+* Initial input: 
+$$h_i^{(0)}=\begin{cases}
+1 & \quad \text{if  $i=s$}\\ 
+0 & \quad \text{otherwise}
+\end{cases}
+$$
+* Node is reachable from 𝑠 if any of its neighbors are reachable:
+$$h_i^{(t+1)}=\begin{cases}
+1 & \quad \text{if  $h_i^{(t)}=1$}\\ 
+1 & \quad \text{if  $\exists j$ s.t. $(i,j)\in E$ and $h_j^{(t)}=1$}\\ 
+0 & \quad \text{otherwise}
+\end{cases}
+$$
+
+This can be rewriten in matrix notation.
+Initially, the embedding matrix is diagonal: 
+$$
+H^{(0)} = \hat{I}
+$$
+After first step, each node gets updated with visits from each nearest neigbour:
+$$
+H^{(1)} = \hat{I} + A = (\hat{I} + A)H^{(0)}
+$$
+After $t+1$ steps:
+$$
+H^{(t+1)} = \theta\left((\hat{I}+ A)H^{(t)}\right)
+$$
+where
+$$
+\theta(x) = \begin{cases}
+1 & \quad \text{if  $x>0$}\\ 
+0 & \quad \text{otherwise}
+\end{cases}
+$$
+to ensure that visited nodes get value 1 each. 
+
+More explicetly, 
+$$
+h_{\nu}^{(l)} = \theta\left(h_{\nu}^{(l-1)} + \sum_{u\in N(\nu)}h_{u}^{(l-1)}\right)
+$$
+Messages are row embeddings, an aggregation is their sum, an update rule is applying $\theta$ to the sum in the brackets in the above formula.
+
+## 2.1 Simple matrix factorization
+Decoder
+$$
+DEC(z_{\nu}^Tz_u) = z_{\nu}^Tz_u
+$$
+
+## 2.2 Alternate matrix factorization
+The optimization objective is
+$$
+\min_Z ||A-Z^TWZ||
+$$
+
+## 2.3 BONUS: Relation to eigen-decomposition
+If $W$ is diagonal containing eigenvalues of $A$, then the above matrix decomposition is equivalent to learning the eigen-decomposition of matrix A.
+
+## 2.4 Multi-hop node similarity
+
+k-hop adjecency matrix is $A_k = A+A^2+...+A^k$. The optimization objective is
+$$
+\min_Z ||A_k-Z^TZ||
+$$
+
+## 2.5 node2vec & struct2vec (i)
