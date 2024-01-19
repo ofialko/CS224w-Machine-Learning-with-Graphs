@@ -214,23 +214,23 @@ It is easy to show that the updated features of all nodes in both graphs  are eq
 Lets assume that Weisfeiler-Lehman test cannot decide whether $G_1$ and $G_2$ are isomorphic at the end of K’th iteration. It means that it yields for any $k\le K$:
 
 $$
-\left\{ l_v^k, \forall v \in V_1 \right\} = \left\{ l_v^k, \forall v \in V_2 \right\}
+\{ l_v^k, \forall v \in V_1 \} = \{ l_v^k, \forall v \in V_2 \}
 $$
 
 while the neaural approach yields the opposite, namely
 
 $$
-\text{READOUT}\left\{ l_v^k, \forall v \in V_1 \right\} = \text{READOUT}\left\{ l_v^k, \forall v \in V_2 \right\}, k \lt K
+\text{READOUT}\{ l_v^k, \forall v \in V_1 \} = \text{READOUT}\{ l_v^k, \forall v \in V_2 \}, k \lt K
 $$
 
 $$
-\text{READOUT}\left\{ l_v^K, \forall v \in V_1 \right\} \neq \text{READOUT}\left\{ l_v^K, \forall v \in V_2 \right\}
+\text{READOUT}\{ l_v^K, \forall v \in V_1 \} \neq \text{READOUT}\{ l_v^K, \forall v \in V_2\}
 $$
 
 So, both approaches aggree upto $k=K-1$. It means they both yield that the corresponding multisets are equal at $k=K-1$:
 
 $$
-\left\{ l_v^k, \forall v \in V_1 \right\} = \left\{ l_v^k, \forall v \in V_2 \right\}, k = K-1
+\{ l_v^k, \forall v \in V_1 \} = \{ l_v^k, \forall v \in V_2 \}, k = K-1
 $$
 
 The disagrement at $k=K$ highlights a contradiction a contradiction. 
