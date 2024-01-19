@@ -204,9 +204,43 @@ H - 8.
 ## 3.2 Aggregation Choice
 Lets consider 3-node graphlets and assume that all nodes in both graphs initially have $h_{v_i}^0 = 1$ for $i\in(1,2)$:
 <p align="center">
-<img src="../pictures/3-node-graphs.png" alt="Raspberry pi" style="width:30%; border:0;">
+<img src="../pictures/3-node-graphs.png" alt="Raspberry pi" style="width:20%; border:0;">
 </p>
 
 It is easy to show that the updated features of all nodes in both graphs  are equal $h_{v_1}^1 = h_{v_2}^1 = 1$ if we use mean and max aggregation. If we use sum aggregation, the upper and lower nodes in $g_1$ will get $h_{v_1}^1 = 1$ , while the remaining node will get $h_{v_1}^1 = 2$. Likewise all nodes in $g_2$ will get $h_{v_2}^1 = 2$ if we use sum aggregation.
 
 ## 3.3 Weisfeiler-Lehman Test
+
+Lets assume that Weisfeiler-Lehman test cannot decide whether $G_1$ and $G_2$ are isomorphic at the end of K’th iteration. It means that it yields for any $k\le K$:
+
+$$
+\left\{ l_v^k, \forall v \in V_1 \right\} = \left\{ l_v^k, \forall v \in V_2 \right\}
+$$
+
+while the neaural approach yields the opposite, namely
+
+$$
+\text{READOUT}\left\{ l_v^k, \forall v \in V_1 \right\} = \text{READOUT}\left\{ l_v^k, \forall v \in V_2 \right\}, k \lt K
+$$
+
+$$
+\text{READOUT}\left\{ l_v^K, \forall v \in V_1 \right\} \neq \text{READOUT}\left\{ l_v^K, \forall v \in V_2 \right\}
+$$
+
+So, both approaches aggree upto $k=K-1$. It means they both yield that the corresponding multisets are equal at $k=K-1$:
+
+$$
+\left\{ l_v^k, \forall v \in V_1 \right\} = \left\{ l_v^k, \forall v \in V_2 \right\}, k = K-1
+$$
+
+The disagrement at $k=K$ highlights a contradiction a contradiction. 
+
+The neural network approach reveals that the multisets become unequal at k=K, indicating that a subset of nodes acquires different features in the two graphs. Let's consider a scenario where only one node exhibits divergence via the neural approach, i.e. $l_{v_1}^K \neq l_{v_2}^K$, while $l_{v_1}^{K-1} = l_{v_2}^{K-1}$. 
+
+Regardless of the specific AGGREGATE and COMBINE functions employed, this divergence implies a difference in local neighborhoods between the graphs. This conclusion is supported by the reasoning that:
+* $l_{v_1}^{K-1} = l_{v_2}^{K-1}$, ensuring initial equality in node features.
+
+* The divergence at k=K must therefore stem from discrepancies in the nearest neighbors $\cal{N}(v)$ sets
+
+Crucially, this differentiation in neighborhoods necessitates a corresponding divergence in the WL test, resulting in $l_{v_1}^K \neq l_{v_2}^K$ for any collisionless HASH function. This is due to the HASH function operating on multisets that are inherently distinct due to the neighborhood differences.
+ 
