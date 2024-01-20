@@ -211,36 +211,16 @@ It is easy to show that the updated features of all nodes in both graphs  are eq
 
 ## 3.3 Weisfeiler-Lehman Test
 
-Lets assume that Weisfeiler-Lehman test cannot decide whether $G_1$ and $G_2$ are isomorphic at the end of K’th iteration. It means that it yields for any $k\le K$:
+Lets assume that Weisfeiler-Lehman (WL) test cannot decide whether $G_1$ and $G_2$ are isomorphic at the end of K’th iteration. It means that it yields for any $k\le K$:
 
 $$
-\{ l_v^k, \forall v \in V_1 \} = \{ l_v^k, \forall v \in V_2 \}
+\lbrace l_v^k, \forall v \in V_1 \rbrace  = \lbrace l_v^k, \forall v \in V_2 \rbrace 
 $$
 
-while the neaural approach yields the opposite, namely
+The WL test simply yields that the multisets $\{l_v^k\}$ are the same for $G_1$ and $G_2$ at the end of $K$ iteration. The procedure summarizes the structure of 𝐾-hop neighborhood: the WL test is telling us that each node in $G_1$ has a corresponding node in $G_2$ with the same K-hop structure.
 
-$$
-\text{READOUT}\{ l_v^k, \forall v \in V_1 \} = \text{READOUT}\{ l_v^k, \forall v \in V_2 \}, k \lt K
-$$
+Similarly, regardless of the specific AGGREGATE and COMBINE functions employed, the neural approach also summarizes the structure of 𝐾-hop neighborhood. The most powerful neural network in this regard is Graph Isomorphism Network (GIN), which is discussed in the lectures and is shown to model the injective HASH functon of the WL kernel. It it likely,that less powerfull neural neworks would fail to show any divergence between $G_1$ and $G_2$ at all. So the divergence at $k=K$ implies a difference in local neighborhoods between the graphs regardless of a neural approach, highlighting a contradiction with the initial assumption. 
 
-$$
-\text{READOUT}\{ l_v^K, \forall v \in V_1 \} \neq \text{READOUT}\{ l_v^K, \forall v \in V_2\}
-$$
 
-So, both approaches aggree upto $k=K-1$. It means they both yield that the corresponding multisets are equal at $k=K-1$:
 
-$$
-\{ l_v^k, \forall v \in V_1 \} = \{ l_v^k, \forall v \in V_2 \}, k = K-1
-$$
-
-The disagrement at $k=K$ highlights a contradiction a contradiction. 
-
-The neural network approach reveals that the multisets become unequal at k=K, indicating that a subset of nodes acquires different features in the two graphs. Let's consider a scenario where only one node exhibits divergence via the neural approach, i.e. $l_{v_1}^K \neq l_{v_2}^K$, while $l_{v_1}^{K-1} = l_{v_2}^{K-1}$. 
-
-Regardless of the specific AGGREGATE and COMBINE functions employed, this divergence implies a difference in local neighborhoods between the graphs. This conclusion is supported by the reasoning that:
-* $l_{v_1}^{K-1} = l_{v_2}^{K-1}$, ensuring initial equality in node features.
-
-* The divergence at k=K must therefore stem from discrepancies in the nearest neighbors $\cal{N}(v)$ sets
-
-Crucially, this differentiation in neighborhoods necessitates a corresponding divergence in the WL test, resulting in $l_{v_1}^K \neq l_{v_2}^K$ for any collisionless HASH function. This is due to the HASH function operating on multisets that are inherently distinct due to the neighborhood differences.
  
