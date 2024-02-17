@@ -31,3 +31,35 @@ For instance, lets assume $h=(0,1)$, $l=(2,-1)$ (incorrect), $t = (1,0)$ and $t'
 The purpose of the margin $\gamma > 0$ is to panalise the arbitrariness of embeddings values, by correcting the sign  $\gamma + d(h+l,t) - d(h+l,t') > 0$ making $\cal{L}_{\text{no margin}}>0$.
 
 In our case, we need to make sure that the margin $\gamma$ is greater than 0.47 (wrong difference) but less than 0.765 (true difference).
+
+
+### 1.3 Normalizing the embeddings 
+
+For any values of $\gamma$, $h$, $t$ and $l$, there will always be a value $t'$ (with any arbitrary norm) to make the term $\gamma + d(h+l,t) - d(h+l,t') < 0$. Normalization of embeddings is necessary to preclude such behaviour.
+
+### 1.4 Expressiveness of TransE embeddings 
+
+## 2 Expressive Power of Knowledge Graph Embeddings
+
+#### 2.1 TransE Modeling
+
+* Symmetry: TransE can not model it, since that would imply $l=-l$, which would lead to $l=0$.
+
+* Inverse: TransE can model it, since 2 different relations have two different embeddings such that $l_{\text{AB}} = -l_{\text{BA}}$
+
+* Composition: Yes again, since $l_{\text{CA}} + l_{\text{AB}} = l_{\text{CB}}$.
+
+#### 2.2 RotatE Modeling
+
+* Symmetry: One would need to assure $h\circ l = t$ as well as $t \circ l = h$. This possible if angles $l$ are $180^\circ$, and the vectors $h$ and $t$ are opposite to each other, e.g. $h=-t$ in 2D space. 
+
+* Inverse: Yes, since there will be 2 different rotations, such that $h\circ l_{\text{AB}} = t$ and $t\circ l_{\text{BA}} = h$.
+
+* Composition: Yes agaain, rotations can be composed $l_{\text{CA}} \oplus l_{\text{AB}} = l_{\text{CB}}$
+
+#### 2.3 Failure Cases
+
+Both models can not model 1 to many relationships.
+
+## 3 Queries on Knowledge Graphs
+
