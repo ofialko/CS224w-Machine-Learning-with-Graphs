@@ -51,11 +51,11 @@ For any values of $\gamma$, $h$, $t$ and $l$, there will always be a value $t'$ 
 
 #### 2.2 RotatE Modeling
 
-* Symmetry: One would need to assure $h\circ l = t$ as well as $t \circ l = h$. This possible if angles $l$ are $180^\circ$, and the vectors $h$ and $t$ are opposite to each other, e.g. $h=-t$ in 2D space. 
+* Symmetry: One would need to assure $h\circ l = t$ as well as $t \circ l = h$. This is possible provided angles $l$ are $180^\circ$, and the vectors $h$ and $t$ are opposite to each other, e.g. $h=-t$ in 2D space. 
 
 * Inverse: Yes, since there will be 2 different rotations, such that $h\circ l_{\text{AB}} = t$ and $t\circ l_{\text{BA}} = h$.
 
-* Composition: Yes agaain, rotations can be composed $l_{\text{CA}} \oplus l_{\text{AB}} = l_{\text{CB}}$
+* Composition: Yes again, rotations can be composed $l_{\text{CA}} \oplus l_{\text{AB}} = l_{\text{CB}}$
 
 #### 2.3 Failure Cases
 
@@ -63,3 +63,63 @@ Both models can not model 1 to many relationships.
 
 ## 3 Queries on Knowledge Graphs
 
+#### 3.1 Path Queries on Complete KGs
+Query
+$$
+(e:\text{Arimidex}, (r:\text{treated}, r:\text{associated})))
+$$
+
+Answer: BRCA1, ESR1, ESR2, BIRC2
+
+#### 3.2 Conjunctive Queries on Complete KGs 
+Query
+$$
+((e:\text{Arimidex}, (r:\text{treated}, r:\text{associated})), (e:\text{Fulvestrand}, (r:\text{causes}, r:\text{associated})))
+$$
+
+#### 3.3 Incomplete KGs
+Since DistMult cannot handle compositional relations, they cannot be easily extended to handle path queries.
+
+#### 3.4 Query2box
+Queries
+$$
+(e:A, (r:R_1, r:R_2)) - \text{red box}
+$$
+$$
+(e:C, (r:R_3) - \text{green box}
+$$
+
+<p align="center">
+<img src="../pictures/Query2Box.png" alt="Raspberry pi" style="width:50%; border:0;">
+</p>
+The answer is  (F,E,D), which sit in the intersection of the red and the green boxes. 
+
+## 4 Subgraph and Order Embeddings
+
+#### 4.1 Transitivity
+
+A subgraph of B is induced by $\{f(v)|v ∈ V_A\}$, while subgraph of C is induced by  $\{g(u)|u ∈ V_B\}$, for two different bijective functions $f$ and $g$. It follows that there is a subgraph in C which is induced by a composite bijection  $\{g\circ f(v))|v ∈ V_A\}$. Assuming that the composition of two bijective functions is bijective, we conclude that A is a subgraph of C.
+
+#### 4.2 Anti-symmetry
+
+We can write for a subgraph of B $\{f(v)|v ∈ V_A\}$ and for a subgraph of A $\{g(u)|u ∈ V_B\}$. A subgraph of A can also be presented as a bijection $\{f\circ g(v))|v ∈ V_A\}$, so its maps to itself ($v ∈ V_A$ means every node in A). This implies that graph B maps to the entire A. Similarly, graph A maps to the entire graph B. That's why A and B are identical.
+
+#### 4.3 Common Subgraphs
+
+$z_X ≼ min\{z_A,z_B\}$ implies $z_X ≼ z_A$ and $z_X ≼ z_B$. So X is a common subraph of A and B. 
+
+#### 4.4 Order Embedding Constraints
+
+If $z_A[0] > z_B[0] > z_C[0]$, then  $z_A[1] < z_B[1] < z_C[1]$, since A,B,C are not subgraphs of each other.
+
+#### 4.5 Subgraph Relations
+
+We have $z_A[0] > z_B[0] > z_C[0]$ and $z_A[1] < z_B[1] < z_C[1]$.
+
+If X is a subgraph of A,B,C; Y and Z are subgraphs of B only as shown in the picture below, then 
+$$
+z_X ≼ z_Y, z_X ≼ z_Z
+$$
+<p align="center">
+<img src="../pictures/SubgraphsRelations-2.png" alt="Raspberry pi" style="width:50%; border:0;">
+</p>
