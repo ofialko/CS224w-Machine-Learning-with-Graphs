@@ -47,3 +47,14 @@ $$
 $$
 
 ### 2.4 Recommendation Task
+
+$$
+\begin{bmatrix}
+     & d &  e & f & g & h & P_u & R_u & \text{Recall@2}\\
+   a & 0.3   & 0.1    & 0.5   & 0.4   & 0.34 & \{e,g\}  &  \{e,h\} &   1/2 \\
+   b & 0.06  & 0.56   & 0.16  & 0.26  & 0.3  &  \{g\}   &  \{d,g\}  &   1  \\
+   c & 0.1   & 0.3    & 0.1   & 0  &  0.14  &  \{f,g,h\}   &  \{g,f\}&  2/3
+\end{bmatrix}
+$$
+
+Final $\text{Recall@2} = (1/2+1+2/3)/3 = 0.7$.
