@@ -41,4 +41,5 @@ $$
 $$
 \bf = \beta \sum_{k=0}^K (1-\beta)^k \tilde{A}^k E^{0}
 $$
- 
+
+### 2.4 Recommendation Task
