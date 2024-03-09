@@ -29,15 +29,19 @@ One can say that self-connection is implicit at the second hop level. For exampl
 $$
 \bf E^{(K)} = \beta E^{0} + (1-\beta)\tilde{A}E^{(K-1)} = 
 $$
+
 $$
 \bf \beta E^{0} + (1-\beta)\tilde{A}(\beta E^{0} + (1-\beta)\tilde{A}E^{(K-2)}) = 
 $$
+
 $$
 \bf \beta(1 + (1-\beta)\tilde{A}) E^{0} + (1-\beta)^2\tilde{A}^2E^{(K-2)} = 
 $$
+
 $$
 ...  
 $$
+
 $$
 \bf = \beta \sum_{k=0}^K (1-\beta)^k \tilde{A}^k E^{0}
 $$
